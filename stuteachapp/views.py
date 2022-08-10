@@ -9,21 +9,28 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
+#the index page view
+
 def index(request):
     return render(request,"index.html")
+
+#general register view which will ask if a student or teacher
 
 def register(request):
     return render(request,"register.html")
 
+#student registration view 
+
 class StudentRegisterView(View):
     
     def get(self,request):
+        #creating two forms first for creatng user and second for student
         mainform = Registration()
         form = StudentRegistration()
         return render(request,'studentregister.html',{'form':form,'mainform':mainform})
     
     def post(self,request):
-
+        #when data is submitted the student is created and saved
         form = StudentRegistration(request.POST)
         mainform = Registration(request.POST)
         if form.is_valid() and mainform.is_valid():
@@ -35,6 +42,7 @@ class StudentRegisterView(View):
             stu.save()
         return render(request,'studentregister.html',{'form':form,'mainform':mainform})
 
+#teacher registration view
 
 class TeacherRegisterView(View):
     

@@ -1,12 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+#Student models
+
 class student(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     name = models.CharField(max_length=20)
     rollno = models.IntegerField()
     standard = models.IntegerField()
     stream = models.CharField(max_length=40)
+
+#teacher models
 
 class teacher(models.Model):
     category_list = [
